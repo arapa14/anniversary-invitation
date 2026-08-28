@@ -1,0 +1,6 @@
+{
+  "name": "Undangan Wedding Anniversary Pastel",
+  "description": "Website undangan digital wedding anniversary statis dengan palet warna pastel yang elegan, animasi pembuka amplop lilin wax seal, kelopak bunga melayang, galeri foto polaroid, hitung mundur, RSVP, dan amplop digital.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
