@@ -56,7 +56,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
         </div>
 
         <p className="text-[10px] font-sans text-[#A68F94] mt-10">
-          Undangan Digital Pernikahan &amp; Ulang Tahun Pernikahan © {new Date().getFullYear()} {INVITATION_DATA.couple.husband.shortName} &amp; {INVITATION_DATA.couple.wife.shortName}
+          Undangan Digital Wedding Anniversary © {new Date().getFullYear()} {INVITATION_DATA.couple.husband.shortName} &amp; {INVITATION_DATA.couple.wife.shortName}
         </p>
       </div>
     </footer>
