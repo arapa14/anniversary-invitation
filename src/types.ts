@@ -8,13 +8,6 @@ export interface Milestone {
   tag: string;
 }
 
-export interface EventScheduleItem {
-  time: string;
-  title: string;
-  description: string;
-  iconName: string;
-}
-
 export interface PhotoItem {
   id: string;
   title: string;
@@ -24,39 +17,30 @@ export interface PhotoItem {
   rotation: number;
 }
 
-export interface DressCodeColor {
-  name: string;
-  hex: string;
-  description: string;
-  previewClass: string;
+export interface DecadeHighlight {
+  number: string;
+  unit: string;
+  title: string;
+  desc: string;
+  colorClass: string;
 }
 
-export interface BankAccount {
-  bankName: string;
-  accountNumber: string;
-  accountHolder: string;
-  bankLogoText: string;
-  qrCodeUrl?: string;
-  type: 'bank' | 'ewallet';
-}
-
-export interface GuestWish {
+export interface LoveVow {
   id: string;
-  senderName: string;
-  relation: string;
+  number: number;
+  title: string;
+  content: string;
+  tag: string;
+}
+
+export interface LoveNote {
+  id: string;
+  author: string;
   message: string;
   timestamp: string;
-  attendance: 'hadir' | 'ragu' | 'tidak_hadir';
   likesCount: number;
   avatarColor: string;
   reactionEmoji?: string;
 }
 
-export interface RsvpFormData {
-  fullName: string;
-  attendance: 'hadir' | 'ragu' | 'tidak_hadir';
-  guestCount: number;
-  message: string;
-  dietaryRestrictions?: string;
-  phoneNumber?: string;
-}
+

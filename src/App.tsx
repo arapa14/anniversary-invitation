@@ -6,26 +6,21 @@ import { FloatingPetals } from './components/FloatingPetals';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { CoupleStorySection } from './components/CoupleStorySection';
-import { EventDetailsSection } from './components/EventDetailsSection';
 import { GallerySection } from './components/GallerySection';
-import { DressCodeSection } from './components/DressCodeSection';
-import { ProgramHighlightsSection } from './components/ProgramHighlightsSection';
-import { RsvpSection } from './components/RsvpSection';
-import { DigitalGiftSection } from './components/DigitalGiftSection';
-import { WishesSection } from './components/WishesSection';
+import { LoveVowsSection } from './components/LoveVowsSection';
 import { FooterSection } from './components/FooterSection';
 import { GuestModal } from './components/GuestModal';
 import { INVITATION_DATA } from './data/invitationData';
-import { GuestWish, RsvpFormData } from './types';
+import { LoveNote } from './types';
 
 export default function App() {
   const [isOpenCover, setIsOpenCover] = useState(false);
-  const [guestName, setGuestName] = useState('Tamu Undangan');
+  const [guestName, setGuestName] = useState('Istriku Tercinta, Ashley');
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
-  const [wishes, setWishes] = useState<GuestWish[]>(INVITATION_DATA.initialWishes);
+  const [notes, setNotes] = useState<LoveNote[]>(INVITATION_DATA.initialNotes);
   const [audioAutoPlayTrigger, setAudioAutoPlayTrigger] = useState(false);
 
-  // Read guest name from URL parameter ?to= or ?guest=
+  // Read recipient name from URL parameter ?to= or ?guest=
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const toParam = params.get('to') || params.get('guest');
@@ -33,13 +28,13 @@ export default function App() {
       setGuestName(decodeURIComponent(toParam));
     }
 
-    // Load saved wishes from localStorage if any
-    const savedWishes = localStorage.getItem('wedding_anniversary_wishes');
-    if (savedWishes) {
+    // Load saved love notes from localStorage if any
+    const savedNotes = localStorage.getItem('anniversary_love_notes');
+    if (savedNotes) {
       try {
-        const parsed = JSON.parse(savedWishes);
+        const parsed = JSON.parse(savedNotes);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          setWishes(parsed);
+          setNotes(parsed);
         }
       } catch {
         // Fallback to default
@@ -53,42 +48,28 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleAddWish = (newWishData: Omit<GuestWish, 'id' | 'timestamp' | 'likesCount'>) => {
-    const newWish: GuestWish = {
-      ...newWishData,
-      id: `wish-${Date.now()}`,
+  const handleAddNote = (newNoteData: Omit<LoveNote, 'id' | 'timestamp' | 'likesCount'>) => {
+    const newNote: LoveNote = {
+      ...newNoteData,
+      id: `note-${Date.now()}`,
       timestamp: 'Baru saja',
       likesCount: 1,
     };
 
-    const updated = [newWish, ...wishes];
-    setWishes(updated);
-    localStorage.setItem('wedding_anniversary_wishes', JSON.stringify(updated));
+    const updated = [newNote, ...notes];
+    setNotes(updated);
+    localStorage.setItem('anniversary_love_notes', JSON.stringify(updated));
   };
 
-  const handleLikeWish = (id: string) => {
-    const updated = wishes.map((item) => {
+  const handleLikeNote = (id: string) => {
+    const updated = notes.map((item) => {
       if (item.id === id) {
         return { ...item, likesCount: item.likesCount + 1 };
       }
       return item;
     });
-    setWishes(updated);
-    localStorage.setItem('wedding_anniversary_wishes', JSON.stringify(updated));
-  };
-
-  const handleRsvpSubmitted = (rsvp: RsvpFormData) => {
-    // If guest included a message in RSVP, also publish it to the wishes guestbook!
-    if (rsvp.message && rsvp.message.trim()) {
-      handleAddWish({
-        senderName: rsvp.fullName,
-        relation: 'Tamu Undangan',
-        message: rsvp.message,
-        attendance: rsvp.attendance,
-        avatarColor: 'bg-rose-100 text-rose-700',
-        reactionEmoji: 'heart',
-      });
-    }
+    setNotes(updated);
+    localStorage.setItem('anniversary_love_notes', JSON.stringify(updated));
   };
 
   const scrollToTop = () => {
@@ -96,8 +77,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF5F7] text-[#7A666A] relative overflow-x-hidden selection:bg-[#FCE4E9] selection:text-[#8E7479]">
-      {/* Falling Rose Petals Animation */}
+    <div className="min-h-screen bg-gradient-to-b from-[#F4FAFD] via-white to-[#E5F6FE]/30 text-[#334E68] relative overflow-x-hidden selection:bg-[#B8EBFF] selection:text-[#243B53]">
+      {/* Floating Petals & Sparkles Animation */}
       <FloatingPetals />
 
       {/* Ambient Romantic Background Music */}
@@ -113,41 +94,23 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Main Invitation Content (Visible after opening cover) */}
+      {/* Main Anniversary Tribute Content (Visible after opening cover) */}
       {isOpenCover && (
         <main className="relative z-10 animate-fadeIn transition-opacity duration-700">
           {/* Hero Section */}
           <HeroSection />
 
-          {/* Couple Profile & Love Story Timeline */}
+          {/* Couple Profile & Love Story Reflection Timeline */}
           <CoupleStorySection />
 
-          {/* Event Details & Schedule */}
-          <EventDetailsSection />
-
-          {/* Polaroid Photo Gallery */}
+          {/* Photo Gallery & Memories */}
           <GallerySection />
 
-          {/* Dress Code & Pastel Swatches */}
-          <DressCodeSection />
-
-          {/* Program Highlights */}
-          <ProgramHighlightsSection />
-
-          {/* RSVP Confirmation Form */}
-          <RsvpSection
-            initialGuestName={guestName}
-            onRsvpSubmitted={handleRsvpSubmitted}
-          />
-
-          {/* Digital Gift & Amplop Digital */}
-          <DigitalGiftSection />
-
-          {/* Wishes & Doa Guestbook */}
-          <WishesSection
-            wishes={wishes}
-            onAddWish={handleAddWish}
-            onLikeWish={handleLikeWish}
+          {/* Love Vows & Private Romantic Notes */}
+          <LoveVowsSection
+            notes={notes}
+            onAddNote={handleAddNote}
+            onLikeNote={handleLikeNote}
           />
 
           {/* Footer */}
@@ -171,3 +134,5 @@ export default function App() {
     </div>
   );
 }
+
+

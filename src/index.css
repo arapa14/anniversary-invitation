@@ -7,12 +7,23 @@
     --font-display: 'Cinzel', serif;
     --font-garamond: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    
+    /* Sea Pastel Color Variables */
+    --color-sea-blue: #89CFF1;
+    --color-light-cyan: #B8EBFF;
+    --color-ice-blue: #E5F6FE;
+    --color-powder-blush: #FFDDDC;
+    --color-pastel-coral: #FFCCCB;
+    --color-soft-pink: #FEBDBB;
+    --color-text-main: #334E68;
+    --color-text-muted: #627D98;
   }
   
   html {
     scroll-behavior: smooth;
     font-family: var(--font-sans);
-    background-color: #FFF5F7;
+    background-color: #F4FAFD;
+    color: #334E68;
     overflow-x: hidden;
     width: 100%;
   }
@@ -22,6 +33,8 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    background-color: #F4FAFD;
+    color: #334E68;
   }
 }
 
@@ -45,41 +58,41 @@
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
-/* Clean Minimalism Card & Frame styling */
-.pastel-card {
+/* Soft Sea Pastel Card & Container styling */
+.sea-pastel-card {
   background: #FFFFFF;
-  border: 1px solid #FCE4E9;
-  box-shadow: 0 10px 40px -10px rgba(255, 182, 193, 0.25), 0 2px 10px -2px rgba(229, 152, 168, 0.08);
+  border: 1px solid #E5F6FE;
+  box-shadow: 0 10px 35px -10px rgba(137, 207, 241, 0.18), 0 2px 8px -2px rgba(254, 189, 187, 0.08);
 }
 
-.pastel-card-hover {
+.sea-pastel-card-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.pastel-card-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 45px -8px rgba(255, 182, 193, 0.35), 0 4px 14px -2px rgba(229, 152, 168, 0.12);
+.sea-pastel-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px -8px rgba(137, 207, 241, 0.28), 0 4px 12px -2px rgba(255, 204, 203, 0.12);
 }
 
-/* Clean Minimalism Wax Seal */
-.wax-seal {
-  background: radial-gradient(circle at 35% 35%, #FAD1DB, #E598A8 60%, #B86778 100%);
-  box-shadow: 0 4px 16px rgba(229, 152, 168, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+/* Soft Sea Pastel Wax / Cameo Seal */
+.sea-pastel-seal {
+  background: radial-gradient(circle at 35% 35%, #E5F6FE, #89CFF1 65%, #62B7DE 100%);
+  box-shadow: 0 4px 14px rgba(137, 207, 241, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6), inset 0 -2px 4px rgba(51, 78, 104, 0.1);
 }
 
-.gold-wax-seal {
-  background: radial-gradient(circle at 35% 35%, #FFF0D6, #E2B980 60%, #AA8147 100%);
-  box-shadow: 0 4px 16px rgba(226, 185, 128, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+.rose-pastel-seal {
+  background: radial-gradient(circle at 35% 35%, #FFDDDC, #FEBDBB 65%, #E59A98 100%);
+  box-shadow: 0 4px 14px rgba(254, 189, 187, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6), inset 0 -2px 4px rgba(120, 70, 70, 0.1);
 }
 
-/* Gradients */
-.gold-gradient-text {
-  background: linear-gradient(135deg, #B58A4E 0%, #D4A96A 50%, #8E6327 100%);
+/* Soft Gradient Texts */
+.sea-gradient-text {
+  background: linear-gradient(135deg, #4895BE 0%, #89CFF1 50%, #334E68 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.rose-gradient-text {
-  background: linear-gradient(135deg, #D1A7B0 0%, #E598A8 50%, #8E7479 100%);
+.pastel-gradient-text {
+  background: linear-gradient(135deg, #334E68 0%, #5B82A6 50%, #FEBDBB 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -90,16 +103,16 @@
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
 }
 
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(255, 193, 204, 0.3);
+    box-shadow: 0 0 12px rgba(184, 235, 255, 0.4);
   }
   50% {
-    box-shadow: 0 0 25px rgba(255, 193, 204, 0.6);
+    box-shadow: 0 0 22px rgba(137, 207, 241, 0.6);
   }
 }
 
@@ -121,7 +134,7 @@
 }
 
 .animate-spin-slow {
-  animation: spinSlow 20s linear infinite;
+  animation: spinSlow 22s linear infinite;
 }
 
 /* Custom Minimalist Scrollbar */
@@ -129,13 +142,14 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FFF5F7;
+  background: #F4FAFD;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FCE4E9;
+  background: #B8EBFF;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FAD1DB;
+  background: #89CFF1;
 }
+
 

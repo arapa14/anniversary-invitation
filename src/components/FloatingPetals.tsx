@@ -24,12 +24,11 @@ export const FloatingPetals: React.FC = () => {
   const animationFrameIdRef = useRef<number | null>(null);
 
   const colors = [
-    '#FCE4EC', // Soft Pink
-    '#F8BBD0', // Blush Rose
-    '#FFD1DC', // Pastel Pink
-    '#F48FB1', // Accent Rose
-    '#FFE58F', // Golden Glow
-    '#D4A96A', // Rich Gold
+    '#B8EBFF', // Sea Blue Light
+    '#E5F6FE', // Ice Blue
+    '#FFDDDC', // Soft Pink
+    '#FEBDBB', // Pastel Coral Pink
+    '#89CFF1', // Sea Pastel Blue
   ];
 
   useEffect(() => {
@@ -57,29 +56,29 @@ export const FloatingPetals: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    const particleCount = Math.min(38, Math.floor(window.innerWidth / 32));
+    const particleCount = Math.min(32, Math.floor(window.innerWidth / 36));
 
     particlesRef.current = Array.from({ length: particleCount }, (_, i) => {
       const type: 'petal' | 'glitter' | 'heart' =
-        i % 5 === 0 ? 'glitter' : i % 7 === 0 ? 'heart' : 'petal';
+        i % 4 === 0 ? 'glitter' : i % 6 === 0 ? 'heart' : 'petal';
 
       return {
         x: Math.random() * width,
         y: Math.random() * height - height,
-        size: type === 'glitter' ? Math.random() * 4 + 3 : Math.random() * 10 + 9,
-        speedX: Math.random() * 1 - 0.5,
-        speedY: type === 'glitter' ? Math.random() * 0.8 + 0.4 : Math.random() * 1.3 + 0.7,
+        size: type === 'glitter' ? Math.random() * 4 + 2 : Math.random() * 9 + 7,
+        speedX: Math.random() * 0.8 - 0.4,
+        speedY: type === 'glitter' ? Math.random() * 0.6 + 0.3 : Math.random() * 1.0 + 0.5,
         rotation: Math.random() * 360,
-        rotationSpeed: Math.random() * 1.8 - 0.9,
-        opacity: Math.random() * 0.45 + 0.35,
+        rotationSpeed: Math.random() * 1.4 - 0.7,
+        opacity: Math.random() * 0.4 + 0.3,
         color:
           type === 'glitter'
             ? Math.random() > 0.5
-              ? '#D4A96A'
-              : '#FFE58F'
+              ? '#89CFF1'
+              : '#FEBDBB'
             : colors[Math.floor(Math.random() * colors.length)],
         type,
-        swayAmplitude: Math.random() * 30 + 15,
+        swayAmplitude: Math.random() * 25 + 10,
         swayFrequency: Math.random() * 0.02 + 0.01,
         swayOffset: Math.random() * Math.PI * 2,
       };
@@ -187,14 +186,14 @@ export const FloatingPetals: React.FC = () => {
           isEnabled ? 'opacity-100' : 'opacity-0'
         }`}
       />
-      {/* Extravagant Floating Particles Toggle */}
+      {/* Floating Particles Toggle */}
       <button
         id="btn-toggle-petals"
         onClick={() => setIsEnabled(!isEnabled)}
-        title={isEnabled ? 'Sembunyikan Efek Kilau & Bunga' : 'Tampilkan Efek Kilau & Bunga'}
-        className="fixed bottom-24 right-4 z-40 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md border border-[#FCE4E9] text-[#D4A96A] flex items-center justify-center shadow-[0_4px_15px_rgba(212,169,106,0.3)] hover:bg-white transition-all text-xs cursor-pointer"
+        title={isEnabled ? 'Sembunyikan Efek Kilau & Kelopak' : 'Tampilkan Efek Kilau & Kelopak'}
+        className="fixed bottom-24 right-4 z-40 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md border border-[#89CFF1]/40 text-[#89CFF1] flex items-center justify-center shadow-[0_4px_15px_rgba(137,207,241,0.25)] hover:bg-[#E5F6FE] transition-all text-xs cursor-pointer"
       >
-        <Sparkles size={15} className={isEnabled ? 'animate-pulse text-[#D4A96A]' : 'opacity-40 text-[#8E7479]'} />
+        <Sparkles size={15} className={isEnabled ? 'animate-pulse text-[#89CFF1]' : 'opacity-40 text-[#627D98]'} />
       </button>
     </>
   );
