@@ -192,10 +192,10 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ autoPlayTrigger }) => 
     >
       {/* Volume Slider Popover */}
       {showVolumeSlider && (
-        <div className="bg-white/95 backdrop-blur-md px-3 py-2 rounded-full border border-[#FCE4E9] shadow-[0_10px_30px_rgba(255,182,193,0.2)] flex items-center gap-2 animate-fadeIn">
+        <div className="bg-white/95 backdrop-blur-md px-3 py-2 rounded-full border border-[#B8EBFF]/60 shadow-[0_8px_25px_rgba(137,207,241,0.2)] flex items-center gap-2 animate-fadeIn">
           <button
             onClick={toggleMute}
-            className="text-[#E598A8] hover:text-[#8E7479] transition-colors p-1 cursor-pointer"
+            className="text-[#89CFF1] hover:text-[#334E68] transition-colors p-1 cursor-pointer"
             title={isMuted ? 'Unmute' : 'Mute'}
           >
             {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
@@ -207,7 +207,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ autoPlayTrigger }) => 
             step="0.05"
             value={isMuted ? 0 : volume}
             onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
-            className="w-16 accent-[#E598A8] h-1.5 cursor-pointer bg-[#FFF5F7] rounded-lg"
+            className="w-16 accent-[#89CFF1] h-1.5 cursor-pointer bg-[#E5F6FE] rounded-lg"
           />
         </div>
       )}
@@ -220,20 +220,20 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ autoPlayTrigger }) => 
           e.preventDefault();
           setShowVolumeSlider(!showVolumeSlider);
         }}
-        className={`group relative flex items-center justify-center w-12 h-12 rounded-full shadow-[0_10px_25px_rgba(255,182,193,0.3)] transition-all duration-300 cursor-pointer ${
+        className={`group relative flex items-center justify-center w-11 h-11 rounded-full shadow-[0_8px_20px_rgba(137,207,241,0.25)] transition-all duration-300 cursor-pointer ${
           isPlaying
-            ? 'bg-[#FCE4E9] text-[#E598A8] ring-1 ring-[#FFC1CC] ring-offset-2'
-            : 'bg-white/90 text-[#A68F94] hover:text-[#E598A8] hover:bg-[#FFF5F7] border border-[#FCE4E9]'
+            ? 'bg-[#E5F6FE] text-[#89CFF1] ring-1 ring-[#89CFF1] ring-offset-2'
+            : 'bg-white/90 text-[#627D98] hover:text-[#89CFF1] hover:bg-[#E5F6FE]/50 border border-[#B8EBFF]/60'
         }`}
         title={isPlaying ? 'Jeda Musik (Klik kanan untuk volume)' : 'Putar Musik Romantis'}
       >
         <div className={`flex items-center justify-center ${isPlaying ? 'animate-spin-slow' : ''}`}>
-          <Music size={18} />
+          <Music size={17} />
         </div>
 
         {/* Pulse Ripple Effect when playing */}
         {isPlaying && (
-          <span className="absolute -inset-1 rounded-full bg-[#FFC1CC]/40 animate-ping pointer-events-none" />
+          <span className="absolute -inset-1 rounded-full bg-[#89CFF1]/30 animate-ping pointer-events-none" />
         )}
       </button>
     </div>
