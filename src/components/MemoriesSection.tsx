@@ -55,7 +55,7 @@ export const MemoriesSection: React.FC<MemoriesSectionProps> = ({ polaroids }) =
             Our Photo Memories
           </h2>
           <p className="text-xs sm:text-sm text-[#627D98] font-light">
-            Setiap detik manis dan senyuman indah yang kita lewati bersama
+            Setiap detik manis dan senyuman indah yang kita lewati bersama 🩷
           </p>
         </motion.div>
 
@@ -74,12 +74,12 @@ export const MemoriesSection: React.FC<MemoriesSectionProps> = ({ polaroids }) =
               {/* Top Washi Tape decorative element */}
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 w-24 h-7 bg-[#B8EBFF]/70 backdrop-blur-sm transform -rotate-2 border-y border-white/60 shadow-xs pointer-events-none rounded-xs" />
 
-              {/* Photo Image Frame */}
-              <div className="relative w-full aspect-square bg-[#F4FAFD] overflow-hidden rounded-xl mb-4 border border-[#E5F6FE]/80">
+              {/* Photo Image Frame - Preserves Basic/Original Image Aspect Ratio */}
+              <div className="relative w-full bg-[#F4FAFD] overflow-hidden rounded-xl mb-4 border border-[#E5F6FE]/80 flex items-center justify-center min-h-[220px] max-h-[460px]">
                 <img
                   src={currentPhoto.url}
                   alt={currentPhoto.caption}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-auto max-h-[440px] object-contain group-hover:scale-102 transition-transform duration-500 rounded-lg"
                   referrerPolicy="no-referrer"
                 />
 
@@ -183,7 +183,7 @@ export const MemoriesSection: React.FC<MemoriesSectionProps> = ({ polaroids }) =
               <img
                 src={zoomedPhoto.url}
                 alt={zoomedPhoto.caption}
-                className="w-full max-h-[65vh] object-cover rounded-xl mb-4"
+                className="w-full max-h-[75vh] object-contain rounded-xl mb-4"
                 referrerPolicy="no-referrer"
               />
               <p className="font-script text-3xl sm:text-4xl text-[#243B53] text-center">

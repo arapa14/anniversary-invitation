@@ -204,24 +204,24 @@ export const KIMMY_DATA: WebKimmyConfig = {
   playlist: [
     {
       id: 's1',
+      name: 'Takkan Terganti',
+      artist: 'Kahitna',
+      url: KahitnaMp3,
+      duration: '3:26',
+    },
+    {
+      id: 's2',
       name: 'Shape of My Heart',
       artist: 'Backstreet Boys',
       url: 'https://file.garden/alGM7SlwpAfCa6pI/Backstreet%20Boys%20-%20Shape%20of%20My%20Heart%20Lyrics.mp3',
       duration: '3:50',
     },
     {
-      id: 's2',
+      id: 's3',
       name: 'Tak Ada Ujungnya',
       artist: 'Roni Parulian',
       url: RoniParulianMp3,
       duration: '3:23',
-    },
-    {
-      id: 's3',
-      name: 'Takkan Terganti',
-      artist: 'Kahitna',
-      url: KahitnaMp3,
-      duration: '3:26',
     },
   ],
   reasons: [
