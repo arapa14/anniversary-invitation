@@ -1,159 +1,136 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Heart, BookOpen, Sparkles, ChevronDown } from 'lucide-react';
-import { INVITATION_DATA } from '../data/invitationData';
-import {
-  GrandFloralArch,
-  GrandGoldDivider,
-  LuxuryBouquetCorner,
-  CelebrationRibbonBadge,
-  WaxSealBadge,
-} from './FloralDecorations';
+import { ChevronDown, Sparkles, Heart } from 'lucide-react';
+import { WebKimmyConfig } from '../types';
 
-export const HeroSection: React.FC = () => {
-  const scrollToStory = () => {
-    const storyElem = document.getElementById('couple-story');
-    if (storyElem) {
-      storyElem.scrollIntoView({ behavior: 'smooth' });
+interface HeroSectionProps {
+  config: WebKimmyConfig;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ config }) => {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Typewriter effect
+  useEffect(() => {
+    const fullPhrase = config.typewriterPhrases[phraseIndex];
+    let timer: NodeJS.Timeout;
+
+    if (!isDeleting) {
+      if (currentText.length < fullPhrase.length) {
+        timer = setTimeout(() => {
+          setCurrentText(fullPhrase.slice(0, currentText.length + 1));
+        }, 80);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2200);
+      }
+    } else {
+      if (currentText.length > 0) {
+        timer = setTimeout(() => {
+          setCurrentText(fullPhrase.slice(0, currentText.length - 1));
+        }, 40);
+      } else {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % config.typewriterPhrases.length);
+      }
     }
-  };
 
-  const scrollToVows = () => {
-    const vowsElem = document.getElementById('love-vows');
-    if (vowsElem) {
-      vowsElem.scrollIntoView({ behavior: 'smooth' });
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, phraseIndex, config.typewriterPhrases]);
+
+  const scrollToBouquet = () => {
+    const bouquetElem = document.getElementById('bouquet');
+    if (bouquetElem) {
+      bouquetElem.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] flex flex-col items-center justify-center pt-8 pb-14 px-3 sm:px-6 text-center overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 relative overflow-hidden"
     >
-      {/* Soft Sea Pastel Corner Accents */}
-      <LuxuryBouquetCorner position="top-left" className="absolute top-0 left-0 w-32 h-32 sm:w-44 sm:h-44 opacity-70" />
-      <LuxuryBouquetCorner position="top-right" className="absolute top-0 right-0 w-32 h-32 sm:w-44 sm:h-44 opacity-70" />
+      <div className="max-w-3xl mx-auto z-10 flex flex-col items-center">
+        {/* Eyebrow badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-[#E5F6FE] backdrop-blur-md text-[#334E68] text-xs sm:text-sm font-medium tracking-widest uppercase mb-6 shadow-xs"
+        >
+          <span>💍</span>
+          <span>Our Happy Anniversary</span>
+          <span>💍</span>
+        </motion.div>
 
-      {/* Gentle Ambient Pastel Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#B8EBFF]/35 rounded-full blur-3xl -z-10 pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-[#FEBDBB]/20 rounded-full blur-3xl -z-10 pointer-events-none" />
+        {/* Grand Anniversary Title */}
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-[#243B53] tracking-tight leading-tight mb-4"
+        >
+          HAPPY <br />
+          <span className="bg-gradient-to-r from-[#4895BE] via-[#89CFF1] to-[#FEBDBB] bg-clip-text text-transparent font-medium">
+            ANNIVERSARY
+          </span>{' '}
+          <br />
+          <span className="tracking-wide font-serif text-4xl sm:text-6xl md:text-7xl text-[#243B53] drop-shadow-xs">
+            {config.recipientName}
+          </span>
+        </motion.h1>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="max-w-md sm:max-w-xl mx-auto w-full relative z-10"
-      >
-        {/* Soft Floral Arch at Top */}
-        <GrandFloralArch className="w-full max-w-sm mx-auto mb-1.5 opacity-80" />
+        {/* Typewriter text container */}
+        <div className="min-h-[48px] sm:min-h-[56px] flex items-center justify-center px-4 mb-4">
+          <p className="font-garamond text-xl sm:text-2xl md:text-3xl text-[#334E68] italic tracking-wide">
+            {currentText}
+            <span className="inline-block w-0.5 h-6 bg-[#89CFF1] ml-1 animate-pulse" />
+          </p>
+        </div>
 
-        {/* Milestone Ribbon Badge */}
-        <CelebrationRibbonBadge
-          title="UNTUK ISTRIKU TERCINTA, ASHLEY"
-          subtitle="2015 — 2026 • 10 TAHUN PERNIKAHAN KITA"
-        />
+        {/* Soft glowing divider */}
+        <div className="flex items-center justify-center gap-3 my-4 w-48 sm:w-64 opacity-80">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#89CFF1]" />
+          <span className="text-sm text-[#89CFF1]">✿</span>
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#89CFF1]" />
+        </div>
 
-        <h2 className="font-serif italic text-lg sm:text-xl text-[#627D98] mt-2 font-normal">
-          Happy 10th Wedding Anniversary, My Love
-        </h2>
-
-        {/* Display Typography for Couple Names */}
-        <h1 className="font-script text-5xl sm:text-6xl text-[#334E68] font-normal my-2 tracking-wide drop-shadow-xs">
-          Daniel <span className="text-[#FEBDBB] font-serif text-4xl sm:text-5xl">&amp;</span> Ashley
-        </h1>
-
-        {/* Soft Divider */}
-        <GrandGoldDivider />
-
-        <p className="font-sans text-[#627D98] max-w-md mx-auto leading-relaxed text-xs sm:text-sm mb-5 italic px-2">
-          &ldquo;{INVITATION_DATA.couple.anniversaryTheme}&rdquo;
+        {/* Date subtitle */}
+        <p className="text-xs sm:text-sm text-[#627D98] uppercase tracking-widest font-medium mb-4">
+          {config.subtitle}
         </p>
 
-        {/* Couple Photo with Soft Ring & Cameo Seal */}
-        <div className="relative mx-auto my-5 w-56 h-56 sm:w-64 sm:h-64">
-          {/* Animated Soft Pastel Halo */}
-          <div className="absolute -inset-2.5 rounded-full border-2 border-dashed border-[#89CFF1]/60 animate-spin-slow" />
-          <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-[#B8EBFF]/30 via-[#FFDDDC]/30 to-[#FEBDBB]/20 blur-sm animate-pulse pointer-events-none" />
-
-          {/* Photo Frame */}
-          <div className="w-full h-full rounded-full overflow-hidden bg-white p-2 border-2 border-[#B8EBFF]/70 shadow-[0_12px_35px_rgba(137,207,241,0.25)]">
-            <img
-              src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop"
-              alt="Daniel & Ashley 10th Anniversary"
-              className="w-full h-full object-cover object-center rounded-full transform hover:scale-105 transition-transform duration-700"
-            />
-          </div>
-
-          {/* Cameo Seal Badge */}
-          <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 z-20">
-            <WaxSealBadge text="10th" size="md" variant="sea" />
-          </div>
-        </div>
-
-        {/* 10-Year Journey Highlights Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full my-6">
-          {INVITATION_DATA.decadeHighlights.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`p-3 rounded-2xl bg-gradient-to-b ${item.colorClass} border backdrop-blur-xs shadow-xs text-center`}
-            >
-              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#334E68]">
-                {item.number}
-              </span>
-              <span className="text-[10px] sm:text-[11px] text-[#627D98] uppercase tracking-wider font-sans font-semibold block mt-0.5">
-                {item.unit}
-              </span>
-              <p className="text-[10.5px] font-sans font-medium text-[#334E68] mt-1 line-clamp-1">
-                {item.title}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Warm Spiritual Verse Card */}
-        <div className="my-5 p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#B8EBFF]/60 shadow-[0_6px_25px_rgba(137,207,241,0.15)] text-center">
-          <p className="font-serif italic text-xs sm:text-sm text-[#334E68] leading-relaxed max-w-lg mx-auto">
-            &ldquo;{INVITATION_DATA.quote.text}&rdquo;
+        {/* Romantic quote */}
+        <div className="max-w-lg mx-auto bg-white/75 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white shadow-md my-2">
+          <p className="font-serif italic text-sm sm:text-base text-[#334E68] leading-relaxed">
+            {config.heroQuote}
           </p>
-          <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[11px] font-sans font-semibold text-[#89CFF1]">
-            <Sparkles size={12} />
-            <span>{INVITATION_DATA.quote.source}</span>
-            <Sparkles size={12} />
-          </div>
         </div>
 
-        {/* Action Buttons: Read Letter & Vows */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 mt-4">
-          <button
-            onClick={scrollToStory}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#89CFF1] via-[#B8EBFF] to-[#FEBDBB] text-[#243B53] text-xs font-sans uppercase tracking-wider font-bold shadow-[0_4px_16px_rgba(137,207,241,0.35)] hover:brightness-105 transition-all cursor-pointer"
-          >
-            <BookOpen size={15} />
-            <span>Baca Surat Kasih untuk Istri</span>
-          </button>
+        {/* Explore Button */}
+        <motion.button
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          onClick={scrollToBouquet}
+          className="mt-8 inline-flex items-center gap-2.5 px-8 py-4 rounded-full btn-sea-primary text-xs sm:text-sm uppercase tracking-widest font-semibold cursor-pointer"
+        >
+          <Sparkles size={16} className="text-white" />
+          <span>Lihat Hadiah Bunga &amp; Kenangan</span>
+          <Heart size={15} className="fill-white text-white" />
+        </motion.button>
 
-          <button
-            onClick={scrollToVows}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-[#334E68] border border-[#89CFF1]/60 text-xs font-sans uppercase tracking-wider font-semibold shadow-xs hover:bg-[#E5F6FE] transition-all cursor-pointer"
-          >
-            <Heart size={14} className="fill-[#FEBDBB] text-[#FEBDBB]" />
-            <span>Janji &amp; Doa Kasih</span>
-          </button>
+        {/* Scroll down indicator */}
+        <div
+          onClick={scrollToBouquet}
+          className="mt-12 text-[#627D98] hover:text-[#243B53] transition-colors cursor-pointer flex flex-col items-center gap-1 animate-bounce"
+        >
+          <span className="text-[10px] tracking-widest uppercase font-medium">Scroll Down</span>
+          <ChevronDown size={18} />
         </div>
-
-        {/* Scroll indicator */}
-        <div className="mt-7 text-[#89CFF1] animate-bounce flex flex-col items-center">
-          <span className="text-[9.5px] font-sans uppercase tracking-widest text-[#627D98]">Gulir ke Bawah</span>
-          <ChevronDown size={16} />
-        </div>
-      </motion.div>
+      </div>
     </section>
   );
 };
-
-
