@@ -170,7 +170,7 @@ export const KIMMY_DATA: WebKimmyConfig = {
   timeline: [
     {
       id: 't1',
-      date: 'The Very Beginning',
+      date: '11 januari 2017',
       title: 'Pertama Kali Kita Bertemu',
       emoji: '✨',
       desc: 'Dua orang yang saling mengenal dan memulai kisah manis bersama.',
@@ -186,7 +186,7 @@ export const KIMMY_DATA: WebKimmyConfig = {
     },
     {
       id: 't3',
-      date: 'Our Greatest Blessing',
+      date: '23 Mei 2025',
       title: 'Kelahiran Buah Hati Tercinta',
       emoji: '👶',
       desc: 'Kehadiran malaikat kecil yang menyempurnakan kehangatan keluarga kita.',
@@ -194,7 +194,7 @@ export const KIMMY_DATA: WebKimmyConfig = {
     },
     {
       id: 't4',
-      date: 'Today & Always',
+      date: 'My Beloved Wife',
       title: 'Happy Anniversary, Istriku ❤️',
       emoji: '🥂',
       desc: 'Terus saling menemani, mengerti, dan menikmati setiap langkah perjalanan ini.',
@@ -204,24 +204,24 @@ export const KIMMY_DATA: WebKimmyConfig = {
   playlist: [
     {
       id: 's1',
+      name: 'Takkan Terganti',
+      artist: 'Kahitna',
+      url: KahitnaMp3,
+      duration: '3:26',
+    },
+    {
+      id: 's2',
       name: 'Shape of My Heart',
       artist: 'Backstreet Boys',
       url: 'https://file.garden/alGM7SlwpAfCa6pI/Backstreet%20Boys%20-%20Shape%20of%20My%20Heart%20Lyrics.mp3',
       duration: '3:50',
     },
     {
-      id: 's2',
+      id: 's3',
       name: 'Tak Ada Ujungnya',
       artist: 'Roni Parulian',
       url: RoniParulianMp3,
       duration: '3:23',
-    },
-    {
-      id: 's3',
-      name: 'Takkan Terganti',
-      artist: 'Kahitna',
-      url: KahitnaMp3,
-      duration: '3:26',
     },
   ],
   reasons: [

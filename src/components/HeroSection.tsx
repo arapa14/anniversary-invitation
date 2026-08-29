@@ -71,7 +71,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config }) => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-[#243B53] tracking-tight leading-tight mb-4"
+          className="font-serif text-6xl sm:text-7xl uppercase md:text-7xl font-normal text-[#243B53] tracking-tight leading-tight mb-4"
         >
           HAPPY <br />
           <span className="bg-gradient-to-r from-[#4895BE] via-[#89CFF1] to-[#FEBDBB] bg-clip-text text-transparent font-medium">

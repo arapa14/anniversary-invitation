@@ -68,6 +68,7 @@ export default function App() {
     const currentSong = config.playlist[currentTrackIndex];
     if (!currentSong) return;
 
+    stopMelodySynth();
     if (synthTimerRef.current) {
       clearInterval(synthTimerRef.current);
       synthTimerRef.current = null;
@@ -79,7 +80,9 @@ export default function App() {
     }
 
     const audio = audioRef.current;
-    audio.src = currentSong.url;
+    if (audio.src !== currentSong.url) {
+      audio.src = currentSong.url;
+    }
 
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => {
@@ -91,33 +94,17 @@ export default function App() {
       handleNextTrack();
     };
 
-    const handleError = () => {
-      // If audio file URL cannot be reached or CORS fails, activate melodious Web Audio synth fallback!
-      if (isPlaying) {
-        playMelodySynth(currentTrackIndex);
-        if (!synthTimerRef.current) {
-          synthTimerRef.current = setInterval(() => {
-            setCurrentTime((prev) => (prev >= duration ? 0 : prev + 1));
-          }, 1000);
-        }
-      }
-    };
-
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
     audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('error', handleError);
 
     if (isPlaying) {
-      audio.play().catch(() => {
-        playMelodySynth(currentTrackIndex);
-        if (!synthTimerRef.current) {
-          synthTimerRef.current = setInterval(() => {
-            setCurrentTime((prev) => (prev >= duration ? 0 : prev + 1));
-          }, 1000);
-        }
+      stopMelodySynth();
+      audio.play().catch((err) => {
+        console.warn('Audio play request interrupted or blocked:', err);
       });
     } else {
+      audio.pause();
       stopMelodySynth();
     }
 
@@ -125,39 +112,23 @@ export default function App() {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
       audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('error', handleError);
-      if (synthTimerRef.current) {
-        clearInterval(synthTimerRef.current);
-      }
+      stopMelodySynth();
     };
   }, [currentTrackIndex, config.playlist, isPlaying]);
 
   const handleTogglePlay = () => {
+    stopMelodySynth();
     if (isPlaying) {
       if (audioRef.current) {
         audioRef.current.pause();
-      }
-      stopMelodySynth();
-      if (synthTimerRef.current) {
-        clearInterval(synthTimerRef.current);
-        synthTimerRef.current = null;
       }
       setIsPlaying(false);
     } else {
       setIsPlaying(true);
       if (audioRef.current) {
-        audioRef.current
-          .play()
-          .catch(() => {
-            playMelodySynth(currentTrackIndex);
-            if (!synthTimerRef.current) {
-              synthTimerRef.current = setInterval(() => {
-                setCurrentTime((prev) => (prev >= duration ? 0 : prev + 1));
-              }, 1000);
-            }
-          });
-      } else {
-        playMelodySynth(currentTrackIndex);
+        audioRef.current.play().catch((err) => {
+          console.warn('Audio play error:', err);
+        });
       }
     }
   };
@@ -169,11 +140,9 @@ export default function App() {
     setIsPlaying(true);
     if (audioRef.current) {
       audioRef.current.src = config.playlist[index].url;
-      audioRef.current.play().catch(() => {
-        playMelodySynth(index);
+      audioRef.current.play().catch((err) => {
+        console.warn('Audio play error:', err);
       });
-    } else {
-      playMelodySynth(index);
     }
   };
 
