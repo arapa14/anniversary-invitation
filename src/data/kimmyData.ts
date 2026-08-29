@@ -34,7 +34,7 @@ export const KIMMY_DATA: WebKimmyConfig = {
       'Semoga kita bisa terus saling menemani, saling mengerti, dan menikmati perjalanan ini apa adanya. Happy anniversary untuk kita. ❤️',
     ],
     closing: 'Dengan segenap cintaku,',
-    signature: 'suamimu ❤️',
+    signature: 'Your Beloved Husband ❤️',
     seal: '💍',
   },
   bouquet: [
