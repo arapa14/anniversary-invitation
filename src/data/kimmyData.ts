@@ -8,8 +8,8 @@ import photoMotherWindow from '../assets/images/memory_mother_window_17880054731
 import photoHeartPicnic from '../assets/images/memory_heart_picnic_1788005490461.jpeg';
 import photoFirstBday from '../assets/images/memory_first_bday_1788005504734.jpeg';
 import photoPicnicLaugh from '../assets/images/memory_picnic_laugh_1788005521905.jpeg';
-import music2 from '../assets/music/2.mp3';
-import music3 from '../assets/music/3.mp3';
+import RoniParulianMp3 from '../assets/music/2.mp3';
+import KahitnaMp3 from '../assets/music/3.mp3';
 
 export const KIMMY_DATA: WebKimmyConfig = {
   recipientName: 'istriku',
@@ -213,14 +213,14 @@ export const KIMMY_DATA: WebKimmyConfig = {
       id: 's2',
       name: 'Tak Ada Ujungnya',
       artist: 'Roni Parulian',
-      url: music2,
+      url: RoniParulianMp3,
       duration: '3:23',
     },
     {
       id: 's3',
       name: 'Takkan Terganti',
       artist: 'Kahitna',
-      url: music3,
+      url: KahitnaMp3,
       duration: '3:26',
     },
   ],
