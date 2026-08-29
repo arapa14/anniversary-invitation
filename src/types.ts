@@ -1,46 +1,59 @@
-export interface Milestone {
+export interface Song {
   id: string;
-  year: string;
+  name: string;
+  artist: string;
+  url: string;
+  duration?: string;
+}
+
+export interface BouquetFlower {
+  id: string;
+  emoji: string;
+  name: string;
+  msg: string;
+  meaning: string;
+  x: number; // percentage in bouquet
+  y: number;
+  color: string;
+}
+
+export interface PolaroidPhoto {
+  id: string;
+  caption: string;
+  url: string;
+  date?: string;
+  rotation?: number;
+}
+
+export interface TimelineMoment {
+  id: string;
+  date: string;
+  title: string;
+  emoji: string;
+  desc: string;
+  delay?: number;
+}
+
+export interface WebKimmyConfig {
+  recipientName: string;
+  senderName: string;
+  pin: string;
   title: string;
   subtitle: string;
-  description: string;
-  imageUrl: string;
-  tag: string;
+  typewriterPhrases: string[];
+  heroQuote: string;
+  letter: {
+    salutation: string;
+    recipientGreeting: string;
+    paragraphs: string[];
+    closing: string;
+    signature: string;
+    seal: string;
+  };
+  bouquet: BouquetFlower[];
+  polaroids: PolaroidPhoto[];
+  timeline: TimelineMoment[];
+  playlist: Song[];
+  reasons: string[];
+  finalQuote: string;
 }
-
-export interface PhotoItem {
-  id: string;
-  title: string;
-  yearOrContext: string;
-  imageUrl: string;
-  caption: string;
-  rotation: number;
-}
-
-export interface DecadeHighlight {
-  number: string;
-  unit: string;
-  title: string;
-  desc: string;
-  colorClass: string;
-}
-
-export interface LoveVow {
-  id: string;
-  number: number;
-  title: string;
-  content: string;
-  tag: string;
-}
-
-export interface LoveNote {
-  id: string;
-  author: string;
-  message: string;
-  timestamp: string;
-  likesCount: number;
-  avatarColor: string;
-  reactionEmoji?: string;
-}
-
-
